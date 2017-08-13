@@ -1,0 +1,66 @@
+<?xml version="1.0"?> 
+<odoo>
+    <record id="view_form_galeria" model="ir.ui.view">
+        <field name="name">Lista de compras de galerias</field>
+        <field name="model">set.productos</field>
+        <field name="arch" type="xml">
+            <form string="Bienvenidos a la tienda de galerias">
+                <header> 
+                    <button name="do_toggle_efectivo" type="object" string="Deseo Pagar con efectivo" class="oe_highlight" attrs="{'invisible': [('efectivo','=',(True))]}" /> 
+                    <button name="do_clear_efectivo" type="object" string="No Deseo Pagar con efectivo"  attrs="{'invisible': [('efectivo','=',(False))]}" /> 
+
+                    <button name="pago_visa" type="object" string="Deseo Pagar con Visa" class="oe_highlight" attrs="{'invisible': [('visa','=',(True))]}"/> 
+                    <button name="no_pago_visa" type="object" string="No Deseo Pagar con Visa" attrs="{'invisible': [('visa','=',(False))]}" />
+                </header> 
+                <sheet>
+                    <field name="foto" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="nombre"/>
+                            <field name="proveedor"/>
+                            <field name="name"/>
+                            <field name="cantidad"/>
+                        </group>
+                        <group>
+                            <field name="precio"/>
+                            <field name="fecha_hora"/>
+                        </group>
+                        <group>
+                            
+                        </group>
+                        <group>
+                            <field name="efectivo"/>
+                            <field name="visa"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_tienda_galeria" model="ir.ui.view"> 
+        <field name="name">compras de artefactos</field> 
+        <field name="model">set.productos</field> 
+        <field name="arch" type="xml">
+            <tree>
+                <field name="proveedor"/>
+                <field name="name"/>
+                <field name="cantidad"/> 
+                <field name="precio"/>
+                <field name="fecha_hora"/> 
+            </tree>
+        </field> 
+    </record> 
+
+    <act_window 
+    id="action_de_galeria" 
+    name="Lista de tendas de galerias" 
+    res_model="set.productos" 
+    view_mode="tree,form"
+    />
+
+    <menuitem id="menu_base_principal" name="Galeria"/>
+    <menuitem id="submenu_principal" name="Tienda de Galeria" parent="menu_base_principal"/>
+    <menuitem id="compras_spa_galeria" name="Galeria" action="action_de_galeria" parent="submenu_principal"/>  
+</odoo>
+

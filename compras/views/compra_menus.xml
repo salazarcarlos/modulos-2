@@ -1,0 +1,66 @@
+<?xml version="1.0"?> 
+<odoo>
+    <record id="view_form_compras1" model="ir.ui.view">
+        <field name="name">Lista de los compradores</field>
+        <field name="model">compra.compra</field>
+        <field name="arch" type="xml">
+            <form string="bienvenido a la tienda de artefactos">
+                <header> 
+                    <button name="do_toggle_efectivo" type="object" string="Deseo Pagar con efectivo" class="oe_highlight" attrs="{'invisible': [('efectivo','=',(True))]}" /> 
+                    <button name="do_clear_efectivo" type="object" string="No Deseo Pagar con efectivo"  attrs="{'invisible': [('efectivo','=',(False))]}" /> 
+
+                    <button name="pago_visa" type="object" string="Deseo Pagar con Visa" class="oe_highlight" attrs="{'invisible': [('visa','=',(True))]}"/> 
+                    <button name="no_pago_visa" type="object" string="No Deseo Pagar con Visa" attrs="{'invisible': [('visa','=',(False))]}" />
+                </header> 
+                <sheet>
+                    <field name="foto" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="proveedor"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="cantidad"/>
+                            <field name="precio"/>
+                        </group>
+                        <group>
+                            <field name="fecha_hora"/>
+                        </group>
+                        <group>
+                            <field name="efectivo"/>
+                            <field name="visa"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_compras2" model="ir.ui.view"> 
+        <field name="name">listas de los clientes compradores</field> 
+        <field name="model">compra.compra</field> 
+        <field name="arch" type="xml">
+            <tree>
+                <field name="proveedor"/>
+                <field name="name"/>
+                <field name="cantidad"/> 
+                <field name="precio"/>
+                <field name="fecha_hora"/> 
+            </tree>
+        </field> 
+    </record> 
+
+    <act_window 
+    id="action_compras_de_productos" 
+    name="Lista de los clientes de compras" 
+    res_model="compra.compra" 
+    view_mode="tree,form"
+    />
+    
+    <menuitem id="menu_principal_compras" name="Compras Productos"/>
+    <menuitem id="menu_de_compras_de_productos_baratos" name="Lista de productos comprados" parent="menu_principal_compras"/>
+    <menuitem id="menu_base_cliente_de_compras" name="Compras" action="action_compras_de_productos" parent="menu_de_compras_de_productos_baratos"/>  
+
+</odoo>
+
+

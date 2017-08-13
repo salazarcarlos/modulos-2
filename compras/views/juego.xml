@@ -1,0 +1,54 @@
+<?xml version="1.0"?> 
+<odoo>
+    <record id="view_form_pelotas" model="ir.ui.view">
+        <field name="name">Lista de ventas de pelotas</field>
+        <field name="model">pelota.pelota</field>
+        <field name="arch" type="xml">
+            <form string="les damos las vienvenida a la tienda y ventas de productos">
+                <header> 
+                    <button name="do_toggle_efectivo" type="object" string="Deseo Pagar con efectivo" class="oe_highlight" attrs="{'invisible': [('efectivo','=',(True))]}" /> 
+                    <button name="do_clear_efectivo" type="object" string="No Deseo Pagar con efectivo"  attrs="{'invisible': [('efectivo','=',(False))]}" /> 
+
+                    <button name="pago_visa" type="object" string="Deseo Pagar con Visa" class="oe_highlight" attrs="{'invisible': [('visa','=',(True))]}"/> 
+                    <button name="no_pago_visa" type="object" string="No Deseo Pagar con Visa" attrs="{'invisible': [('visa','=',(False))]}" />
+                </header> 
+                <sheet>
+                    <field name="foto" widget="image" class="oe_avatar"/>
+                    <group>
+                            <field name="proveedor"/>
+                            <field name="name"/>
+                            <field name="cantidad"/>
+                            <field name="precio"/>
+                            <field name="fecha_hora"/>
+                            <field name="efectivo"/>
+                            <field name="visa"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_pelotas_campos" model="ir.ui.view"> 
+        <field name="name">listas de pelotas y ventas</field> 
+        <field name="model">pelota.pelota</field> 
+        <field name="arch" type="xml">
+            <tree>
+                <field name="proveedor"/>
+                <field name="name"/>
+                <field name="cantidad"/> 
+                <field name="precio"/>
+                <field name="fecha_hora"/> 
+            </tree>
+        </field> 
+    </record> 
+
+    <act_window 
+    id="action_de_productos_pelotas" 
+    name="Lista de productos de pelotas" 
+    res_model="pelota.pelota" 
+    view_mode="tree,form"
+    />
+
+    <menuitem id="cliente_de_compras" name="Pelota" action="action_de_productos_pelotas" parent="menu_de_compras_de_productos_baratos"/>  
+
+</odoo>
